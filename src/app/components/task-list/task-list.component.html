@@ -1,0 +1,50 @@
+<!-- Górny pasek narzędzi -->
+<mat-toolbar color="primary">
+    <span>Task Management</span>
+    <span class="spacer"></span>
+    <button mat-icon-button (click)="onAddTask()" aria-label="Add Task">
+        <mat-icon>add</mat-icon>
+    </button>
+</mat-toolbar>
+
+<!-- Sekcja filtrów -->
+<div class="filters">
+    <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="filter.status" (selectionChange)="onFilterChange()">
+            <mat-option value="all">Wszystkie</mat-option>
+            <mat-option value="completed">Ukończone</mat-option>
+            <mat-option value="pending">Oczekujące</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Priorytet</mat-label>
+        <mat-select [(value)]="filter.priority" (selectionChange)="onFilterChange()">
+            <mat-option value="all">Wszystkie</mat-option>
+            <mat-option value="low">Niski</mat-option>
+            <mat-option value="medium">Średni</mat-option>
+            <mat-option value="high">Wysoki</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="search-field">
+        <mat-label>Szukaj</mat-label>
+        <input matInput [(ngModel)]="filter.searchTerm" (ngModelChange)="onFilterChange()"
+            placeholder="Szukaj zadań...">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
+
+<!-- Lista zadań -->
+<div class="task-list">
+    <div *ngIf="filteredTasks.length === 0" class="no-tasks">
+        <mat-icon>assignment</mat-icon>
+        <p>Brak zadań do wyświetlenia</p>
+    </div>
+
+
+    <app-task-item *ngFor="let task of filteredTasks" [task]="task" (toggleCompletion)="onToggleTask($event)"
+        (deleteTask)="onDeleteTask($event)" (editTask)="onEditTask($event)">
+    </app-task-item>
+</div>

@@ -1,0 +1,63 @@
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 400px;
+  padding: 16px 0;
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+.tags-section {
+  .tags-list {
+    margin-top: 8px;
+
+    .mat-chip-listbox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      .mat-chip-option {
+        background-color: #e3f2fd;
+        color: #1976d2;
+        border-radius: 16px;
+
+        mat-icon {
+          margin-left: 8px;
+          cursor: pointer;
+
+          &:hover {
+            color: #f44336;
+          }
+        }
+      }
+    }
+  }
+}
+
+mat-dialog-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+mat-dialog-actions {
+  gap: 8px;
+
+  button {
+    min-width: 100px;
+  }
+}
+
+// Responsywność
+@media (max-width: 600px) {
+  .task-form {
+    min-width: 300px;
+  }
+}

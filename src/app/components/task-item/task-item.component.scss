@@ -1,0 +1,104 @@
+.task-card {
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  // Ukończone zadania
+  &.completed {
+    opacity: 0.7;
+    background-color: #f0f8ff;
+
+    .mat-card-title {
+      text-decoration: line-through;
+      color: #666;
+    }
+  }
+
+  // Zadania po terminie
+  &.overdue {
+    border-left: 4px solid #f44336;
+    background-color: #fff3f3;
+  }
+}
+
+.mat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .mat-checkbox {
+    margin-right: 8px;
+  }
+}
+
+.mat-card-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  flex: 1;
+}
+
+.mat-card-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.mat-card-content {
+  p {
+    margin: 8px 0;
+    color: #333;
+    line-height: 1.5;
+  }
+}
+
+.mat-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+
+  .mat-chip {
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+  }
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 16px;
+}
+
+// Responsywność - mobilny widok
+@media (max-width: 768px) {
+  .task-card {
+    margin-bottom: 12px;
+  }
+
+  .mat-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    .mat-card-subtitle {
+      margin-left: 0;
+    }
+  }
+
+  .mat-card-title {
+    font-size: 16px;
+  }
+
+  .mat-chip-list {
+    .mat-chip {
+      font-size: 10px;
+    }
+  }
+}

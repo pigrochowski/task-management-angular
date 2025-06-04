@@ -1,0 +1,28 @@
+<mat-card class="task-card" [class.completed]="task.completed" [class.overdue]="isOverdue()">
+    <mat-card-header>
+        <mat-checkbox [checked]="task.completed" (change)="onToggleCompletion()"></mat-checkbox>
+        <mat-card-title>{{ task.title }}</mat-card-title>
+        <mat-card-subtitle *ngIf="task.dueDate">Termin: {{ formatDate(task.dueDate) }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>{{ task.description }}</p>
+        <mat-chip-listbox>
+            <mat-chip-option [style.backgroundColor]="getPriorityColor()" color="primary" selected>
+                {{ getPriorityLabel() }}
+            </mat-chip-option>
+            <mat-chip-option *ngFor="let tag of task.tags" color="accent" selected>{{ tag }}</mat-chip-option>
+        </mat-chip-listbox>
+    </mat-card-content>
+
+    <!-- x mat-card-actions: -->
+    <mat-card-actions>
+        <button mat-icon-button color="primary" aria-label="Edytuj zadanie" (click)="onEdit()">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" aria-label="Usuń zadanie" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </mat-card-actions>
+
+</mat-card>

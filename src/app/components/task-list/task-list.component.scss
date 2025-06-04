@@ -1,0 +1,62 @@
+.spacer {
+  flex: 1 1 auto; // Wypychanie przycisków na koniec toolbar
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  flex-wrap: wrap;
+  align-items: center;
+
+  mat-form-field {
+    min-width: 120px;
+  }
+
+  .search-field {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+.task-list {
+  padding: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 64px 16px;
+  color: #666;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 18px;
+    margin: 0;
+  }
+}
+
+// Responsywność - mobilny widok
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    gap: 8px;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .task-list {
+    padding: 8px;
+  }
+}

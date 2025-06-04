@@ -1,0 +1,76 @@
+<h2 mat-dialog-title>{{ data?.task ? 'Edytuj zadanie' : 'Dodaj nowe zadanie' }}</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="taskForm" class="task-form">
+        <!-- Tytuł zadania -->
+        <mat-form-field appearance="fill">
+            <mat-label>Tytuł zadania</mat-label>
+            <input matInput formControlName="title" placeholder="Wpisz tytuł zadania">
+            <mat-error *ngIf="taskForm.get('title')?.hasError('required')">
+                Tytuł jest wymagany
+            </mat-error>
+            <mat-error *ngIf="taskForm.get('title')?.hasError('minlength')">
+                Tytuł musi mieć co najmniej 3 znaki
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Opis zadania -->
+        <mat-form-field appearance="fill">
+            <mat-label>Opis zadania</mat-label>
+            <textarea matInput formControlName="description" rows="3"
+                placeholder="Opisz zadanie szczegółowo"></textarea>
+            <mat-error *ngIf="taskForm.get('description')?.hasError('required')">
+                Opis jest wymagany
+            </mat-error>
+            <mat-error *ngIf="taskForm.get('description')?.hasError('minlength')">
+                Opis musi mieć co najmniej 10 znaków
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Priorytet -->
+        <mat-form-field appearance="fill">
+            <mat-label>Priorytet</mat-label>
+            <mat-select formControlName="priority">
+                <mat-option value="low">Niski</mat-option>
+                <mat-option value="medium">Średni</mat-option>
+                <mat-option value="high">Wysoki</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- Data terminu -->
+        <mat-form-field appearance="fill">
+            <mat-label>Termin wykonania</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dueDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- Tagi -->
+        <div class="tags-section">
+            <mat-form-field appearance="fill">
+                <mat-label>Dodaj tag</mat-label>
+                <input matInput [(ngModel)]="newTag" (keypress)="onTagKeyPress($event)"
+                    placeholder="Wpisz tag i naciśnij Enter">
+                <button mat-icon-button matSuffix type="button" (click)="addTag()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <div class="tags-list" *ngIf="tags.length > 0">
+                <mat-chip-listbox>
+                    <mat-chip-option *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                        {{ tag }}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip-option>
+                </mat-chip-listbox>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Anuluj</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="taskForm.invalid">
+        Dodaj zadanie
+    </button>
+</mat-dialog-actions>
